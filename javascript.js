@@ -141,12 +141,16 @@ equalButton.addEventListener("click", () => {
     if (inputComplete) {
         numberCounter = 0;
         secondNumber = parseInt(displayValue);
-        displayValue = operate(firstNumber, secondNumber, operator);
-        if (displayValue.toString().length > 11) {
-            displayValue = parseInt(displayValue.toString().slice(0, 11))
+        if (operator === "/" && secondNumber === 0) {
+            displayValue = "You can't!";
+        } else {
+            displayValue = operate(firstNumber, secondNumber, operator);
+            if (displayValue.toString().length > 11) {
+                displayValue = parseInt(displayValue.toString().slice(0, 11));
+            }
+            operationComplete = true;
+            inputComplete = false;
         }
         updateDisplay();
-        operationComplete = true;
-        inputComplete = false;
     }
 })
