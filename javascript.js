@@ -22,6 +22,7 @@ let newInput = false;
 let operationComplete = false;
 let inputComplete = false;
 let operationActive = false;
+let historyContent = 0;
 
 function operate(a, b, op) {
     switch (op) {
@@ -44,7 +45,7 @@ function updateDisplay() {
 }
 
 function updateHistory() {
-    history.textContent = operate(firstNumber, secondNumber, operator);
+    history.textContent = historyContent;
 }
 
 const numberButtons = document.querySelectorAll(".number");
@@ -76,33 +77,61 @@ const clearButton = document.querySelector(".clear");
 const equalButton = document.querySelector(".equal");
 
 operatorAdd.addEventListener("click", () => {
-    firstNumber = parseInt(displayValue);
+    let previousOperator = operator;
     operator = "+";
-    newInput = true;
+    if (operationActive) {
+        pressEqualButton(previousOperator);
+        updateHistory();
+        firstNumber = parseInt(displayValue);
+    } else {
+        firstNumber = parseInt(displayValue);
+        newInput = true;
+    }
     inputComplete = true;
     operationActive = true;
 });
 
 operatorSubtract.addEventListener("click", () => {
-    firstNumber = parseInt(displayValue);
+    let previousOperator = operator;
     operator = "-";
-    newInput = true;
+    if (operationActive) {
+        pressEqualButton(previousOperator);
+        updateHistory();
+        firstNumber = parseInt(displayValue);
+    } else {
+        firstNumber = parseInt(displayValue);
+        newInput = true;
+    }
     inputComplete = true;
     operationActive = true;
 });
 
 operatorMultiply.addEventListener("click", () => {
-    firstNumber = parseInt(displayValue);
+    let previousOperator = operator;
     operator = "*";
-    newInput = true;
+    if (operationActive) {
+        pressEqualButton(previousOperator);
+        updateHistory();
+        firstNumber = parseInt(displayValue);
+    } else {
+        firstNumber = parseInt(displayValue);
+        newInput = true;
+    }
     inputComplete = true;
     operationActive = true;
 });
 
 operatorDivide.addEventListener("click", () => {
-    firstNumber = parseInt(displayValue);
+    let previousOperator = operator;
     operator = "/";
-    newInput = true;
+    if (operationActive) {
+        pressEqualButton(previousOperator);
+        updateHistory();
+        firstNumber = parseInt(displayValue);
+    } else {
+        firstNumber = parseInt(displayValue);
+        newInput = true;
+    }
     inputComplete = true;
     operationActive = true;
 });
@@ -113,25 +142,29 @@ clearButton.addEventListener("click", () => {
     secondNumber = 0;
     newInput = false;
     operationComplete = false;
+    historyContent = 0;
+    history.textContent = 0;
     updateDisplay();
 });
 
 equalButton.addEventListener("click", () => {
-    PressEqualButton();
+    pressEqualButton(operator);
 });
 
-function PressEqualButton() {
+function pressEqualButton(op) {
     if (inputComplete) {
         secondNumber = parseInt(displayValue);
-        if (operator === "/" && secondNumber === 0) {
+        if (op === "/" && secondNumber === 0) {
             displayValue = "You can't!";
         } else {
-            displayValue = operate(firstNumber, secondNumber, operator);
+            displayValue = operate(firstNumber, secondNumber, op);
+            historyContent = displayValue;
             if (displayValue.toString().length > 11) {
                 displayValue = parseInt(displayValue.toString().slice(0, 11));
             }
             operationComplete = true;
             inputComplete = false;
+            operationActive = false;
         }
         updateDisplay();
     }
