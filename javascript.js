@@ -21,6 +21,7 @@ let displayValue = "";
 let numberCounter = 0;
 let operatorActive = false;
 let operationComplete = false;
+let inputComplete = false;
 
 function operate(a, b, op) {
     switch (op) {
@@ -59,7 +60,9 @@ numberButtons.forEach(function(item) {
                 operationComplete = false;
             }
         } else {
-            displayValue += item.textContent;
+            if (displayValue.length < 11) {
+                displayValue += item.textContent;
+            }
         }
         updateDisplay();
     });
@@ -82,6 +85,7 @@ operatorAdd.addEventListener("click", () => {
     numberCounter = numberCounter % 2;
     operator = "+";
     operatorActive = true;
+    inputComplete = true;
 });
 
 operatorSubtract.addEventListener("click", () => {
@@ -94,6 +98,7 @@ operatorSubtract.addEventListener("click", () => {
     numberCounter = numberCounter % 2;
     operator = "-";
     operatorActive = true;
+    inputComplete = true;
 });
 
 operatorMultiply.addEventListener("click", () => {
@@ -106,6 +111,7 @@ operatorMultiply.addEventListener("click", () => {
     numberCounter = numberCounter % 2;
     operator = "*";
     operatorActive = true;
+    inputComplete = true;
 });
 
 operatorDivide.addEventListener("click", () => {
@@ -118,6 +124,7 @@ operatorDivide.addEventListener("click", () => {
     numberCounter = numberCounter % 2;
     operator = "/";
     operatorActive = true;
+    inputComplete = true;
 });
 
 clearButton.addEventListener("click", () => {
@@ -131,11 +138,15 @@ clearButton.addEventListener("click", () => {
 })
 
 equalButton.addEventListener("click", () => {
-    if (operatorActive) {
+    if (inputComplete) {
         numberCounter = 0;
         secondNumber = parseInt(displayValue);
         displayValue = operate(firstNumber, secondNumber, operator);
+        if (displayValue.toString().length > 11) {
+            displayValue = parseInt(displayValue.toString().slice(0, 11))
+        }
         updateDisplay();
         operationComplete = true;
+        inputComplete = false;
     }
 })
