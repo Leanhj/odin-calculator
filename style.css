@@ -1,5 +1,5 @@
 * {
-    font-family: monospace;
+    font-family: Courier New;
 }
 
 body {
@@ -25,6 +25,8 @@ body {
     padding: 8px;
     text-align: right;
     font-size: 32px;
+    display: flex;
+    flex-direction: column;
 }
 
 .buttons {
@@ -40,9 +42,10 @@ body {
 }
 
 button {
-    border-radius: 100%;
+    border-radius: 8px;
     border: 2px solid black;
-    width: 64px;
-    height: 64px;
-    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    padding: 8px;
 }

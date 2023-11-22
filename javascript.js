@@ -17,6 +17,7 @@ function divide(a, b) {
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "+";
+let displayValue = "";
 
 function operate(a, b, op) {
     switch (op) {
@@ -30,3 +31,19 @@ function operate(a, b, op) {
             return divide(a, b);
     }
 }
+
+const activeDisplay = document.querySelector(".active-display");
+const history = document.querySelector(".history");
+
+function updateDisplay() {
+    activeDisplay.textContent = displayValue;
+}
+
+const numberButtons = document.querySelectorAll(".number");
+
+numberButtons.forEach(function(item) {
+    item.addEventListener("click", () => {
+        displayValue += item.textContent;
+        updateDisplay();
+    });
+});
