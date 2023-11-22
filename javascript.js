@@ -52,7 +52,7 @@ const numberButtons = document.querySelectorAll(".number");
 
 numberButtons.forEach(function(item) {
     item.addEventListener("click", () => {
-        if (newInput || operationComplete || parseInt(displayValue) === 0) {
+        if (newInput || operationComplete || Number(displayValue) === 0) {
             displayValue = item.textContent;
             if (newInput) {
                 newInput = false;
@@ -82,9 +82,9 @@ operatorAdd.addEventListener("click", () => {
     if (operationActive) {
         pressEqualButton(previousOperator);
         updateHistory();
-        firstNumber = parseInt(displayValue);
+        firstNumber = Number(displayValue);
     } else {
-        firstNumber = parseInt(displayValue);
+        firstNumber = Number(displayValue);
         newInput = true;
     }
     inputComplete = true;
@@ -97,9 +97,9 @@ operatorSubtract.addEventListener("click", () => {
     if (operationActive) {
         pressEqualButton(previousOperator);
         updateHistory();
-        firstNumber = parseInt(displayValue);
+        firstNumber = Number(displayValue);
     } else {
-        firstNumber = parseInt(displayValue);
+        firstNumber = Number(displayValue);
         newInput = true;
     }
     inputComplete = true;
@@ -112,9 +112,9 @@ operatorMultiply.addEventListener("click", () => {
     if (operationActive) {
         pressEqualButton(previousOperator);
         updateHistory();
-        firstNumber = parseInt(displayValue);
+        firstNumber = Number(displayValue);
     } else {
-        firstNumber = parseInt(displayValue);
+        firstNumber = Number(displayValue);
         newInput = true;
     }
     inputComplete = true;
@@ -127,9 +127,9 @@ operatorDivide.addEventListener("click", () => {
     if (operationActive) {
         pressEqualButton(previousOperator);
         updateHistory();
-        firstNumber = parseInt(displayValue);
+        firstNumber = Number(displayValue);
     } else {
-        firstNumber = parseInt(displayValue);
+        firstNumber = Number(displayValue);
         newInput = true;
     }
     inputComplete = true;
@@ -153,15 +153,13 @@ equalButton.addEventListener("click", () => {
 
 function pressEqualButton(op) {
     if (inputComplete) {
-        secondNumber = parseInt(displayValue);
+        secondNumber = Number(displayValue);
         if (op === "/" && secondNumber === 0) {
             displayValue = "You can't!";
         } else {
             displayValue = operate(firstNumber, secondNumber, op);
-            historyContent = displayValue;
-            if (displayValue.toString().length > 11) {
-                displayValue = parseInt(displayValue.toString().slice(0, 11));
-            }
+            historyContent = displayValue.toString().slice(0, 11);
+            displayValue = Number(displayValue.toString().slice(0, 11));
             operationComplete = true;
             inputComplete = false;
             operationActive = false;
