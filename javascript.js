@@ -18,10 +18,10 @@ let firstNumber = 0;
 let secondNumber = 0;
 let operator = "+";
 let displayValue = "";
-let numberCounter = 0;
 let newInput = false;
 let operationComplete = false;
 let inputComplete = false;
+let operationActive = false;
 
 function operate(a, b, op) {
     switch (op) {
@@ -76,62 +76,41 @@ const clearButton = document.querySelector(".clear");
 const equalButton = document.querySelector(".equal");
 
 operatorAdd.addEventListener("click", () => {
-    if (numberCounter === 0) {
-        firstNumber = parseInt(displayValue);
-    } else {
-        secondNumber = parseInt(displayValue);
-    }
-    numberCounter++;
-    numberCounter = numberCounter % 2;
+    firstNumber = parseInt(displayValue);
     operator = "+";
     newInput = true;
     inputComplete = true;
+    operationActive = true;
 });
 
 operatorSubtract.addEventListener("click", () => {
-    if (numberCounter === 0) {
-        firstNumber = parseInt(displayValue);
-    } else {
-        secondNumber = parseInt(displayValue);
-    }
-    numberCounter++;
-    numberCounter = numberCounter % 2;
+    firstNumber = parseInt(displayValue);
     operator = "-";
     newInput = true;
     inputComplete = true;
+    operationActive = true;
 });
 
 operatorMultiply.addEventListener("click", () => {
-    if (numberCounter === 0) {
-        firstNumber = parseInt(displayValue);
-    } else {
-        secondNumber = parseInt(displayValue);
-    }
-    numberCounter++;
-    numberCounter = numberCounter % 2;
+    firstNumber = parseInt(displayValue);
     operator = "*";
     newInput = true;
     inputComplete = true;
+    operationActive = true;
 });
 
 operatorDivide.addEventListener("click", () => {
-    if (numberCounter === 0) {
-        firstNumber = parseInt(displayValue);
-    } else {
-        secondNumber = parseInt(displayValue);
-    }
-    numberCounter++;
-    numberCounter = numberCounter % 2;
+    firstNumber = parseInt(displayValue);
     operator = "/";
     newInput = true;
     inputComplete = true;
+    operationActive = true;
 });
 
 clearButton.addEventListener("click", () => {
     displayValue = 0;
     firstNumber = 0;
     secondNumber = 0;
-    numberCounter = 0;
     newInput = false;
     operationComplete = false;
     updateDisplay();
@@ -143,7 +122,6 @@ equalButton.addEventListener("click", () => {
 
 function PressEqualButton() {
     if (inputComplete) {
-        numberCounter = 0;
         secondNumber = parseInt(displayValue);
         if (operator === "/" && secondNumber === 0) {
             displayValue = "You can't!";
