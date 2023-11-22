@@ -2,6 +2,10 @@
     font-family: Courier New;
 }
 
+html {
+    background-color: #040D12;
+}
+
 body {
     display: flex;
     align-items: center;
@@ -19,6 +23,7 @@ body {
     flex-direction: column;
     gap: 8px;
     padding: 8px;
+    background-color: #183D3D;
 }
 
 .display {
@@ -27,6 +32,7 @@ body {
     font-size: 32px;
     display: flex;
     flex-direction: column;
+    background-color: #93B1A6;
 }
 
 .buttons {
@@ -34,6 +40,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    background-color: #183D3D;
 }
 
 .first-row, .second-row, .third-row, .fourth-row {
@@ -48,4 +55,16 @@ button {
     height: 48px;
     font-size: 24px;
     padding: 8px;
+}
+
+.number {
+    background-color: #5C8374;
+}
+
+.operator-add, .operator-subtract, .operator-multiply, .operator-divide {
+    background-color: #93B1A6;
+}
+
+.equal, .clear {
+    background-color: #008170;
 }
