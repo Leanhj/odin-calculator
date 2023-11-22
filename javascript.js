@@ -19,7 +19,7 @@ let secondNumber = 0;
 let operator = "+";
 let displayValue = "";
 let numberCounter = 0;
-let operatorActive = false;
+let newInput = false;
 let operationComplete = false;
 let inputComplete = false;
 
@@ -51,10 +51,10 @@ const numberButtons = document.querySelectorAll(".number");
 
 numberButtons.forEach(function(item) {
     item.addEventListener("click", () => {
-        if (operatorActive || operationComplete || parseInt(displayValue) === 0) {
+        if (newInput || operationComplete || parseInt(displayValue) === 0) {
             displayValue = item.textContent;
-            if (operatorActive) {
-                operatorActive = false;
+            if (newInput) {
+                newInput = false;
             } else {
                 updateHistory();
                 operationComplete = false;
@@ -84,7 +84,7 @@ operatorAdd.addEventListener("click", () => {
     numberCounter++;
     numberCounter = numberCounter % 2;
     operator = "+";
-    operatorActive = true;
+    newInput = true;
     inputComplete = true;
 });
 
@@ -97,7 +97,7 @@ operatorSubtract.addEventListener("click", () => {
     numberCounter++;
     numberCounter = numberCounter % 2;
     operator = "-";
-    operatorActive = true;
+    newInput = true;
     inputComplete = true;
 });
 
@@ -110,7 +110,7 @@ operatorMultiply.addEventListener("click", () => {
     numberCounter++;
     numberCounter = numberCounter % 2;
     operator = "*";
-    operatorActive = true;
+    newInput = true;
     inputComplete = true;
 });
 
@@ -123,7 +123,7 @@ operatorDivide.addEventListener("click", () => {
     numberCounter++;
     numberCounter = numberCounter % 2;
     operator = "/";
-    operatorActive = true;
+    newInput = true;
     inputComplete = true;
 });
 
@@ -132,12 +132,16 @@ clearButton.addEventListener("click", () => {
     firstNumber = 0;
     secondNumber = 0;
     numberCounter = 0;
-    operatorActive = false;
+    newInput = false;
     operationComplete = false;
     updateDisplay();
-})
+});
 
 equalButton.addEventListener("click", () => {
+    PressEqualButton();
+});
+
+function PressEqualButton() {
     if (inputComplete) {
         numberCounter = 0;
         secondNumber = parseInt(displayValue);
@@ -153,4 +157,4 @@ equalButton.addEventListener("click", () => {
         }
         updateDisplay();
     }
-})
+}
