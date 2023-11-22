@@ -50,7 +50,7 @@ const numberButtons = document.querySelectorAll(".number");
 
 numberButtons.forEach(function(item) {
     item.addEventListener("click", () => {
-        if (operatorActive || operationComplete || displayValue === 0) {
+        if (operatorActive || operationComplete || parseInt(displayValue) === 0) {
             displayValue = item.textContent;
             if (operatorActive) {
                 operatorActive = false;
@@ -131,9 +131,11 @@ clearButton.addEventListener("click", () => {
 })
 
 equalButton.addEventListener("click", () => {
-    numberCounter = 0;
-    secondNumber = parseInt(displayValue);
-    displayValue = operate(firstNumber, secondNumber, operator);
-    updateDisplay();
-    operationComplete = true;
+    if (operatorActive) {
+        numberCounter = 0;
+        secondNumber = parseInt(displayValue);
+        displayValue = operate(firstNumber, secondNumber, operator);
+        updateDisplay();
+        operationComplete = true;
+    }
 })
